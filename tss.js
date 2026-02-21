@@ -14,9 +14,9 @@ Jumi.ready = ()=>{
 		console.log("I sense a key")
 	})
 	TSS.main.listenTo("keyTPressed", ()=>{
-		TSS.add("text").in(TSS.root).focus()
+		TSS.add("text").in(TSS.root)
 	})
 	TSS.main.listenTo("keyCPressed", ()=>{
-		TSS.add("circle").in(TSS.root).focus()
+		TSS.add("circle").in(TSS.root)
 	})
 }

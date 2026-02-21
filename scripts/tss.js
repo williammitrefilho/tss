@@ -63,34 +63,13 @@ Jumi.ready = () => {
 		KBugol.addListener(eventName, this)
 		this[eventName] = callback
 	}
+
+	SoumElement.prototype.listenToSome = function(namedCallbacks){
+		for(var eventName in namedCallbacks)
+			this.listenTo(eventName, namedCallbacks[eventName])
+	}
 	SoumElement.prototype.stopListeningTo = function(eventName){
 		KBugol.removeListener(eventName, this)
-	}
-	SoumElement.prototype.keyESCAPEPressed = ()=>{
-		KBugol.target?.unfocus?.()
-	}
-	SoumElement.prototype.focus = function(){
-		Array.from(document.querySelector("svg *")).forEach((element)=>{
-			element.classList.remove("focused")
-		})
-		this.element.classList.add("focused")
-		KBugol.target = this
-	}
-	SoumElement.prototype.unfocus = function(){
-		this.element.classList.remove("focused")
-		KBugol.target = TSS.main
-	}
-	SoumGraphic.prototype.keyARROWUPPressed = function(){
-		this.y = Number(this.y) - 5
-	}
-	SoumGraphic.prototype.keyARROWDOWNPressed = function(){
-		this.y = Number(this.y) + 5
-	}
-	SoumGraphic.prototype.keyARROWLEFTPressed = function(){
-		this.x = Number(this.x) - 5
-	}
-	SoumGraphic.prototype.keyARROWRIGHTPressed = function(){
-		this.x = Number(this.x) + 5
 	}
 	A = Soum.a
 	TSS = ThreeSimpleScripts
