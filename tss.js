@@ -42,7 +42,16 @@ function init(){
 		KBugol.target = TSS.main
 	}
 	SoumGraphic.prototype.keyARROWUPPressed = function(){
-		this.y -= 5
+		this.y = Number(this.y) - 5
+	}
+	SoumGraphic.prototype.keyARROWDOWNPressed = function(){
+		this.y = Number(this.y) + 5
+	}
+	SoumGraphic.prototype.keyARROWLEFTPressed = function(){
+		this.x = Number(this.x) - 5
+	}
+	SoumGraphic.prototype.keyARROWRIGHTPressed = function(){
+		this.x = Number(this.x) + 5
 	}
 	TSS.add = (type, name)=>{
 		if(!TSS[`${type}s`])
