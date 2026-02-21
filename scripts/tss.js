@@ -2,7 +2,8 @@ class ThreeSimpleScripts{
 	static start(){
 		let tss = new ThreeSimpleScripts()
 		tss.bind()
-		ThreeSimpleScripts.main = tss
+		ThreeSimpleScripts.tss = tss
+		ThreeSimpleScripts.main = tss.main
 		ThreeSimpleScripts.root = tss.main.element
 	}
 	constructor(){
@@ -14,3 +15,4 @@ class ThreeSimpleScripts{
 }
 
 const TSS = ThreeSimpleScripts
+
