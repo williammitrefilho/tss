@@ -53,20 +53,30 @@ class Group extends SoumGraphic{
 			x:0.0, y:0.0,
 		}
 	}
+	get transform(){
+		let transform = `translate(${this.pivot.x} ${this.pivot.y})`
+		return transform
+	}
+	set transform(transform){
+		this.element.setAttribute("transform", transform)
+	}
+
 	set x(x){
 
 		let dx = x - this.pivot.x
 		this._elements.forEach((element)=>{
-			element.x -= -dx
+//			element.x -= -dx
 		})
 		this.pivot.x = x
+		this.transform = this.transform
 	}
 	set y(y){
 		let dy = y - this.pivot.y
 		this._elements.forEach((element)=>{
-			element.y -= -dy //You really want to to this?
+//			element.y -= -dy //You really want to to this?
 		})
 		this.pivot.y = y
+		this.transform = this.transform
 	}
 	get x(){
 		return this.pivot.x
