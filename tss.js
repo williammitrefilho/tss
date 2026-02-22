@@ -1,78 +1,86 @@
-JumiLoader.include('kbugol/kbugol')
-JumiLoader.include('soum/soum')
+class ThreeSimpleScripts{
+	static add(type, name){
 
-let A, TSS
+		if(!TSS[`${type}s`])
+			TSS[`${type}s`] = {}
+		let soum = Soum.a(type)
 
-Jumi.ready = () => {
+		if(!name)
+			name = `${type}${TSS.numberOf(type)+1}`
 
-	class ThreeSimpleScripts{
-		static add(type, name){
+		TSS[`${type}s`][name]?.element.remove()
+		TSS[`${type}s`][name] = soum
+		return soum
+	}
+	static numberOf(type){
+		if(!TSS[`${type}s`])
+			return 0
 
-			if(!TSS[`${type}s`])
-				TSS[`${type}s`] = {}
-			let soum = A(type)
+		return Object.getOwnPropertyNames(TSS[`${type}s`]).length
+	}
+	static start(){
+		let tss = new ThreeSimpleScripts()
+		let kbug = new KBugol()
+		tss.bind()
+		kbug.listen()
+		ThreeSimpleScripts.tss = tss
+		ThreeSimpleScripts.main = tss.main
+		ThreeSimpleScripts.root = tss.main.element
 
-			if(!name)
-				name = `${type}${TSS.numberOf(type)+1}`
-
-			TSS[`${type}s`][name]?.element.remove()
-			TSS[`${type}s`][name] = soum
-			return soum
-		}
-		static numberOf(type){
-			if(!TSS[`${type}s`])
-				return 0
-
-			return Object.getOwnPropertyNames(TSS[`${type}s`]).length
-		}
-		static start(){
-			let tss = new ThreeSimpleScripts()
-			tss.bind()
-			ThreeSimpleScripts.tss = tss
-			ThreeSimpleScripts.main = tss.main
-			ThreeSimpleScripts.root = tss.main.element
-		}
-
-		constructor(){
-			this.main = Soum.svg(330)
-		}
-		bind(){
-			this.main.appendTo(document.body)
-		}
+		ThreeSimpleScripts.kbug = kbug
 	}
 
-	class Group {
-		constructor(elements = []){
-			this.elements = elements
-		}
-		set x(x){
-			this._x = x
-			this.elements.forEach((element)=>{
-				element.x = x
-			})
-		}
-		set y(y){
-			this._y = y
-			this.elements.forEach((element)=>{
-				element.y = y
-			})
-		}
+	constructor(){
+		this.main = Soum.svg(330)
 	}
-	
-	SoumElement.prototype.listenTo = function(eventName, callback){
-		KBugol.addListener(eventName, this)
-		this[eventName] = callback
+	bind(){
+		this.main.appendTo(document.body)
 	}
-
-	SoumElement.prototype.listenToSome = function(namedCallbacks){
-		for(var eventName in namedCallbacks)
-			this.listenTo(eventName, namedCallbacks[eventName])
-	}
-	SoumElement.prototype.stopListeningTo = function(eventName){
-		KBugol.removeListener(eventName, this)
-	}
-	A = Soum.a
-	TSS = ThreeSimpleScripts
-
-	JumiLoader.broadcast(Group)
 }
+
+class Group extends SoumGraphic{
+	constructor(elements = []){
+		super("g")
+		this.elements = elements
+	}
+	set x(x){
+		super.x = x
+		this._elements.forEach((element)=>{
+			element.x = x
+		})
+	}
+	set y(y){
+		super.y = y
+		this._elements.forEach((element)=>{
+			element.y = y
+		})
+	}
+	set elements(elements){
+		this.element.innerHTML = ""
+		elements.forEach(element=>element.appendTo(this.element))
+	}
+}
+
+SoumElement.prototype.listenTo = function(eventName, callback){
+	KBugol.addListener(eventName, this)
+	this[eventName] = callback
+}
+
+SoumElement.prototype.listenToSome = function(namedCallbacks){
+	for(var eventName in namedCallbacks)
+		this.listenTo(eventName, namedCallbacks[eventName])
+}
+SoumElement.prototype.stopListeningTo = function(eventName){
+	KBugol.removeListener(eventName, this)
+}
+SoumElement.prototype.focus = function(){
+	KBugol.target = this
+	this.element.classList.add("focused")
+}
+SoumElement.prototype.unfocus = function(){
+	KBugol.target = null
+	this.element.classList.remove("focused")
+}
+
+const TSS = ThreeSimpleScripts
+const A = TSS.add
