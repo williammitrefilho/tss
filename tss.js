@@ -66,6 +66,10 @@ class Group extends SoumGraphic{
 		this.element.innerHTML = ""
 		elements.forEach(element=>element.appendTo(this.element))
 	}
+	redrawElement(element){
+		let redrawable = this._elements.find(_element=>_element.id==element.id)
+		redrawable.redraw()
+	}
 }
 
 SoumElement.prototype.listenTo = function(eventName, callback){
