@@ -1,9 +1,6 @@
 [submodule "scripts/kbugol"]
 	path = scripts/kbugol
 	url = https://github.com/williammitrefilho/kbugol
-[submodule "scripts/jumiloader"]
-	path = scripts/jumiloader
-	url = https://github.com/williammitrefilho/jumiloader
 [submodule "scripts/soum"]
 	path = scripts/soum
 	url = https://github.com/williammitrefilho/soum
