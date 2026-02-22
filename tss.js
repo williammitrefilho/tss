@@ -49,18 +49,30 @@ class Group extends SoumGraphic{
 	constructor(elements, id = Soum.newId()){
 		super("g")
 		this.elements = elements
+		this.pivot = {
+			x:0.0, y:0.0,
+		}
 	}
 	set x(x){
-		super.x = x
+
+		let dx = x - this.pivot.x
 		this._elements.forEach((element)=>{
-			element.x = x
+			element.x -= -dx
 		})
+		this.pivot.x = x
 	}
 	set y(y){
-		super.y = y
+		let dy = y - this.pivot.y
 		this._elements.forEach((element)=>{
-			element.y = y
+			element.y -= -dy //You really want to to this?
 		})
+		this.pivot.y = y
+	}
+	get x(){
+		return this.pivot.x
+	}
+	get y(){
+		return this.pivot.y
 	}
 	set elements(elements){
 		this.element.innerHTML = ""
