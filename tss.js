@@ -46,7 +46,7 @@ class ThreeSimpleScripts{
 }
 
 class Group extends SoumGraphic{
-	constructor(elements = []){
+	constructor(elements, id = Soum.newId()){
 		super("g")
 		this.elements = elements
 	}
