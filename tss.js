@@ -1,3 +1,10 @@
+class Incrementable{
+	static counter = 0
+}
+Incrementable.newId = function(){
+	return TSS.getCounterFor(this)
+}
+
 class ThreeSimpleScripts{
 	static add(type, name){
 
@@ -84,3 +91,9 @@ SoumElement.prototype.unfocus = function(){
 
 const TSS = ThreeSimpleScripts
 const A = TSS.add
+
+TSS.getCounterFor = (object)=>{
+	if(!globalThis[object.prototype.constructor.name])
+		globalThis[object.prototype.constructor.name] = object.prototype.constructor
+	return ++globalThis[object.prototype.constructor.name].counter
+}
