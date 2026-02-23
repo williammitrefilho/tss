@@ -47,7 +47,7 @@ class ThreeSimpleScripts{
 
 class Group extends SoumGraphic{
 	constructor(elements, id = Soum.newId()){
-		super("g")
+		super("g", id)
 		this.elements = elements
 		this.pivot = {
 			x:0.0, y:0.0,
