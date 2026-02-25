@@ -108,11 +108,11 @@ SoumElement.prototype.stopListeningTo = function(eventName){
 	KBugol.removeListener(eventName, this)
 }
 SoumElement.prototype.focus = function(){
-	KBugol.target = this
+//	KBugol.target = this
 	this.element.classList.add("focused")
 }
 SoumElement.prototype.unfocus = function(){
-	KBugol.target = null
+//	KBugol.target = null
 	this.element.classList.remove("focused")
 }
 
